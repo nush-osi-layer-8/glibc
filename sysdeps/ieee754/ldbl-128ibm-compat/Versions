@@ -1,0 +1,10 @@
+%include <ldbl-128ibm-compat-abi.h>
+%ifndef LDBL_IBM128_VERSION
+% error "ldbl-128ibm-compat-abi.h must define LDBL_IBM128_VERSION"
+%endif
+
+libc {
+  LDBL_IBM128_VERSION {
+    __ieee128_vfprintf;
+  }
+}
