@@ -31,4 +31,13 @@ $(objpfx)test-printf-ibm128.out: \
   $(objpfx)test-printf-ibm128
 	$(SHELL) $^ '$(test-program-prefix)' $@; \
 	$(evaluate-test)
+
+# XXX: DO NOT COMMIT.
+#
+# On powerpc64le, the implementation of long double with IEEE binary128
+# format is not complete.  The redirections of the stdio.h functions
+# are supposed to be implemented in bits/stdio-ldbl.h, however, we can
+# only redirect all or none.  In the meantime, bits/stdio-ieee128.h
+# allows us to redirect part of them for testing purposes.  */
+headers += bits/stdio-ieee128.h
 endif

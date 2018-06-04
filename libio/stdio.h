@@ -864,6 +864,19 @@ extern int __overflow (FILE *, int);
 # include <bits/stdio-ldbl.h>
 #endif
 
+/* XXX: DO NOT COMMIT.
+
+   On powerpc64le, the implementation of long double with IEEE binary128
+   format is not complete.  The redirections of the stdio.h functions
+   are supposed to be implemented in bits/stdio-ldbl.h, however, we can
+   only redirect all or none.  In the meantime, bits/stdio-ieee128.h
+   allows us to redirect part of them for testing purposes.  */
+#include <bits/floatn.h>
+#if __HAVE_DISTINCT_FLOAT128 && __LDBL_MANT_DIG__ == 113 && \
+    ! defined __BUILDING_EXTRA_LDBL_FORMAT
+# include <bits/stdio-ieee128.h>
+#endif
+
 __END_DECLS
 
 #endif /* <stdio.h> included.  */
